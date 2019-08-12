@@ -1,14 +1,18 @@
 import mongoose from 'mongoose';
 
 const contactSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
-        require: true
+        required: true
     },
     phoneNumber: {
         type: String,
         required: true,
         unique: true
+    },
+    createdBy: {
+        type: String,
+        required: true
     }
 });
 
