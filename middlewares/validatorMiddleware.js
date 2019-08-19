@@ -11,7 +11,7 @@ export const phoneNumberValidator = (req, res, next) => {
 };
 
 export const receiverValidator = (req, res, next) => {
-	if (req.body && "receviver" in req.body) {
+	if (req.body && "receiver" in req.body) {
 		if (!/^[0-9]+$/.test(req.body.receiver)) {
 			res.status(400).json({ message: "Invalid phone number" });
 		} else {

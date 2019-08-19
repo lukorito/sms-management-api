@@ -54,7 +54,7 @@ export const getAll = async (req, res, next) => {
 	}).exec();
 	return contacts.length
 		? res.status(200).json({ contacts })
-		: res.status(400).json({ message: "No contacts found" });
+		: res.status(200).json({ message: "No contacts found" });
 };
 
 export const updateContact = async (req, res, next) => {
@@ -78,9 +78,7 @@ export const deleteContact = async (req, res, next) => {
 		phoneNumber: req.params.phoneNumber,
 	}).exec();
 	if (contact) {
-		// Todo
-		// Delete user messages and contact
-		await Message.deleteMany({});
+		await Message.deleteMany({ sender: req.params.phoneNumber, receiver: req.params.phoneNumber});
 		await Contact.deleteOne({ phoneNumber: contact.phoneNumber });
 		res.status(400).json({ message: "Contact deleted" });
 	} else {

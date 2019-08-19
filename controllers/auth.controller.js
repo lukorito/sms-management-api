@@ -3,10 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export function signup(req, res, next) {
-	if (isNaN(req.body.phoneNumber)) {
-		res.status(400).json({ message: "Phone Number must be a number" });
-	}
-
 	User.findOne({ phoneNumber: req.body.phoneNumber }, function(err, user) {
 		if (user) {
 			res.status(400).json({ message: "User already exists" });

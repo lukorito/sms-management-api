@@ -1,4 +1,5 @@
 import Message from "../models/Message";
+import Contact from "../models/Contact";
 
 export const createMessage = async (req, res, next) => {
 	const { receiver, text } = req.body;
@@ -20,7 +21,7 @@ export const createMessage = async (req, res, next) => {
 			res.status(201).json({ message: "Message sent successfully" });
 		} catch (e) {
 			console.log(e);
-			res.status(400).json({ message: "An error occured" });
+			res.status(400).json({ message: "An error occurred" });
 		}
 	} else {
 		res.status(400).json({ message: "No contact found" });
@@ -72,18 +73,17 @@ export const updateMessage = async (req, res, next) => {
 };
 
 export const deleteMessage = async (req, res, next) => {
-	const { phoneNumber } = req.params;
-	if (phoneNumber === req.user.phoneNumber) {
-		res.status(400).json({ message: "You cannot delete yourself" });
+	const { id } = req.params;
+	const { phoneNumber } = req.user;
+	const message = await Message.find({ _id: id }).or([
+		{ sender: phoneNumber },
+		{ receiver: phoneNumber },
+	]);
+	if (message) {
+		await Message.deleteOne({ _id: id });
+		res.status(200).json({ message: "Message deleted" })
 	} else {
-		Message.deleteMany(
-			{ sender: phoneNumber, receiver: phoneNumber },
-			(err) => {
-				if (err) {
-					res.status(400).json({ message: "An error occured" });
-				}
-				res.status(200).json({ message: "Message deleted" });
-			},
-		);
+		res.status(400).json({ message: "No message found"})
 	}
+
 };

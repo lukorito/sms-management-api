@@ -26,7 +26,7 @@ import {
 const router = express.Router();
 
 // auth
-router.post("/register", signup);
+router.post("/register", phoneNumberValidator, userNameValidator, signup);
 router.post("/login", login);
 
 // contacts
@@ -45,7 +45,7 @@ router.put(
 	userNameValidator,
 	updateContact,
 );
-router.delete("/contact/:phoneNumber", checkToken, updateContact);
+router.delete("/contact/:phoneNumber", checkToken, deleteContact);
 
 // messages
 router.post(
