@@ -10,9 +10,8 @@
     "server": "babel-node index.js",
     "server:prod": "node ./dist/index.js",
     "dev": "NODE_ENV=development npm-run-all server",
-    "clean": "rimraf dist",
-    "prebuild": "yarn --ignore-optional",
-    "build": "babel . -d dist --ignore='node_modules'",
+    "clean": "rimraf dist && npm cache clean --force",
+    "build": "babel . -d ./dist --ignore='node_modules'",
     "prod": "NODE_ENV=production npm run clean && npm run build && npm run server:prod",
     "watch": "nodemon"
   },
