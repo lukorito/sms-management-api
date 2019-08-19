@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: 'This is an api to add contacts and send and receive messages to their contact lists'
+  description: 'This is an api to add contacts and send and receive messages to their contact lists. When adding auth header click on the authorize button and add the authentication header in this format `Bearer JWT-token`'
   version: 1.0.0
   title: SMS Management API
   contact:
