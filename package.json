@@ -1,17 +1,17 @@
 {
   "name": "sms-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/lukorito/sms-management-api.git",
   "author": "Kelvin Lukorito <kelvin.lukorito@andela.com>",
   "license": "MIT",
   "scripts": {
     "start": "npm run prod",
-    "server": "babel-node index.js",
+    "server": "babel-node src/index.js",
     "server:prod": "node ./dist/index.js",
     "dev": "NODE_ENV=development npm-run-all server",
-    "clean": "rimraf dist && npm cache clean --force",
-    "build": "babel . -d ./dist --ignore='node_modules'",
+    "clean": "rimraf dist",
+    "build": "babel src -d ./dist",
     "prod": "NODE_ENV=production npm run clean && npm run build && npm run server:prod",
     "watch": "nodemon"
   },

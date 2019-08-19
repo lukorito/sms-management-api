@@ -16,7 +16,7 @@ tags:
   - name: Messages
     description: Operations about messages
 schemes:
-#  - https
+  - https
   - http
 securityDefinitions:
   Bearer:
@@ -135,7 +135,7 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: id
+        - name: phoneNumber
           in: path
           description: Contact's phone number
           required: true
@@ -154,16 +154,11 @@ paths:
       consumes:
         - application/json
       parameters:
-        - in: query
-          name: contact
-          description: phone number to change
-          schema:
-            type: object
-            required:
-              - phoneNumber
-            properties:
-              phoneNumber:
-                type: string
+        - in: path
+          name: phoneNumber
+          description: Contact's phone number
+          required: true
+          type: string
         - in: body
           name: user
           description: Contact new username.
@@ -190,16 +185,11 @@ paths:
       consumes:
         - application/json
       parameters:
-        - in: query
-          name: contact
-          description: phone number to be deleted
-          schema:
-            type: object
-            required:
-              - phoneNumber
-            properties:
-              phoneNumber:
-                type: string
+        - in: path
+          name: phoneNumber
+          description: Contact's phone number
+          required: true
+          type: string
       responses:
         200:
           description: OK

@@ -78,7 +78,10 @@ export const deleteContact = async (req, res, next) => {
 		phoneNumber: req.params.phoneNumber,
 	}).exec();
 	if (contact) {
-		await Message.deleteMany({ sender: req.params.phoneNumber, receiver: req.params.phoneNumber});
+		await Message.deleteMany().or([
+			{ sender: req.params.phoneNumber },
+			{ receiver: req.params.phoneNumber },
+		]);
 		await Contact.deleteOne({ phoneNumber: contact.phoneNumber });
 		res.status(400).json({ message: "Contact deleted" });
 	} else {
